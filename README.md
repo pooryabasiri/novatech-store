@@ -33,7 +33,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
   - HTML5
   - CSS3 (Custom Properties, Grid, Flexbox)
