@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="NovaTech Store - Premium Technology Designed For The Future. Shop cutting-edge devices engineered for creators and professionals." />
+    <title>NovaTech Store — Premium Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='700' font-size='18'>N</text></svg>" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- wishlist -->
+    <aside id="wishlist-sidebar" class="wishlist-sidebar" aria-label="My wishlist" role="dialog" aria-modal="true">
+        <div class="wishlist-header">
+            <h2>
+                My Wishlist
+                <span id="wishlist-count-badge" class="cart-count-badge">0</span>
+            </h2>
+            <button id="wishlist-close" class="cart-close" aria-label="Close wishlist">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="wishlist-items" class="wishlist-items"></div>
+
+        <div id="wishlist-empty" class="cart-empty">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+            </svg>
+            <p>Your wishlist is empty</p>
+            <span>Save products you love</span>
+        </div>
+    </aside>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <!-- Cart Sidebar -->
+    <aside id="cart-sidebar" class="cart-sidebar" aria-label="Shopping cart" role="dialog" aria-modal="true">
+        <div class="cart-header">
+            <h2>
+                Shopping Cart
+                <span id="cart-count-badge" class="cart-count-badge">0</span>
+            </h2>
+            <button id="cart-close" class="cart-close" aria-label="Close cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items rendered by JS -->
+        </div>
+        <div id="cart-empty" class="cart-empty">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <p>Your cart is empty</p>
+            <span>Add some products to get started</span>
+        </div>
+        <div id="cart-footer" class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button id="checkout-btn" class="btn btn-primary btn-full">
+                Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true">
+        <div class="mobile-menu-header">
+            <span class="logo">NovaTech<span class="logo-dot">.</span></span>
+            <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#home" class="mobile-nav-link active">Home</a>
+            <a href="#products" class="mobile-nav-link">Products</a>
+            <a href="#reviews" class="mobile-nav-link">Reviews</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+        <div class="mobile-menu-actions">
+            <button id="mobile-theme-toggle" class="mobile-theme-toggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal" role="dialog" aria-label="Product details" aria-modal="true"
+        aria-hidden="true">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-container">
+            <button id="modal-close" class="modal-close" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-content">
+                <div class="modal-image">
+                    <img id="modal-img" src="" alt="" />
+                </div>
+                <div class="modal-info">
+                    <span id="modal-category" class="modal-category"></span>
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-description"></p>
+                    <div class="modal-rating">
+                        <div class="modal-stars" id="modal-stars"></div>
+                        <span id="modal-reviews-count"></span>
+                    </div>
+                    <div class="modal-price" id="modal-price"></div>
+                    <div class="modal-features">
+                        <h4>Key Features</h4>
+                        <ul id="modal-features"></ul>
+                    </div>
+                    <div class="modal-quantity">
+                        <label>Quantity</label>
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="modal-qty-minus" aria-label="Decrease quantity">
+                                −
+                            </button>
+                            <span class="qty-value" id="modal-qty-value">1</span>
+                            <button class="qty-btn" id="modal-qty-plus" aria-label="Increase quantity">
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    <button id="modal-add-cart" class="btn btn-primary btn-full">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header id="navbar" class="navbar">
+        <div class="container navbar-inner">
+            <a href="#home" class="logo" aria-label="NovaTech Home">
+                NovaTech
+            </a>
+            <nav class="nav-desktop" aria-label="Main navigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="navbar-actions">
+                <button id="theme-toggle" class="icon-btn theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button id="wishlist-btn" class="icon-btn" aria-label="Open wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <span id="wishlist-counter" class="cart-counter">0</span>
+                </button>
+                <button id="cart-btn" class="icon-btn cart-btn" aria-label="Open cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span id="cart-counter" class="cart-counter" aria-label="items in cart">0</span>
+                </button>
+                <button id="mobile-menu-btn" class="icon-btn mobile-menu-btn" aria-label="Open menu"
+                    aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-new">
+            <div class="container">
+                <div class="hero-text-box reveal">
+                    <h1 class="hero-title">
+                        Technology Designed For
+                        <span class="gradient-text">The Future</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Premium devices engineered for creators and professionals.
+                        Experience innovation that redefines what's possible.
+                    </p>
+                </div>
+            </div>
+            <div class="hero-slider-wrapper reveal">
+                <div class="swiper hero-swiper">
+                    <div class="swiper-wrapper" id="hero-slider">
+                        <!-- Slides by JS -->
+                    </div>
+                    <div class="swiper-pagination hero-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trusted Brands -->
+        <section class="brands">
+            <div class="container">
+                <p class="brands-label reveal">
+                    Trusted by industry leaders
+                </p>
+                <div class="brands-track reveal">
+                    <div class="brands-slide">
+                        <span class="brand-item">Apple</span>
+                        <span class="brand-item">Sony</span>
+                        <span class="brand-item">Samsung</span>
+                        <span class="brand-item">Dell</span>
+                        <span class="brand-item">Asus</span>
+                        <span class="brand-item">Microsoft</span>
+                        <span class="brand-item">Google</span>
+                        <span class="brand-item">Logitech</span>
+                    </div>
+                    <div class="brands-slide" aria-hidden="true">
+                        <span class="brand-item">Apple</span>
+                        <span class="brand-item">Sony</span>
+                        <span class="brand-item">Samsung</span>
+                        <span class="brand-item">Dell</span>
+                        <span class="brand-item">Asus</span>
+                        <span class="brand-item">Microsoft</span>
+                        <span class="brand-item">Google</span>
+                        <span class="brand-item">Logitech</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Featured</span>
+                    <h2 class="section-title">Our Best Sellers</h2>
+                    <p class="section-subtitle">
+                        Handpicked products that our customers love most.
+                    </p>
+                </div>
+                <div class="featured-slider-wrapper reveal">
+                    <button class="swiper-button-prev featured-prev"></button>
+
+                    <div class="swiper featured-swiper">
+                        <div class="swiper-wrapper" id="featured-slider">
+                            <!-- Slides will be rendered by JS -->
+                        </div>
+                    </div>
+
+                    <button class="swiper-button-next featured-next"></button>
+
+                    <div class="swiper-pagination featured-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Catalog -->
+        <section id="products" class="catalog">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Catalog</span>
+                    <h2 class="section-title">Browse Products</h2>
+                    <p class="section-subtitle">
+                        Explore our complete range of premium technology
+                        products.
+                    </p>
+                </div>
+                <div class="catalog-controls reveal">
+                    <div class="catalog-search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Search products..."
+                            aria-label="Search products" />
+                    </div>
+                    <div class="catalog-filters">
+                        <div class="filter-group">
+                            <label for="filter-category" class="sr-only">Filter by category</label>
+                            <select id="filter-category" aria-label="Filter by category">
+                                <option value="all">All Categories</option>
+                                <option value="phone">Phones</option>
+                                <option value="laptop">Laptops</option>
+                                <option value="audio">Audio</option>
+                                <option value="wearable">Wearables</option>
+                                <option value="accessory">
+                                    Accessories
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="sort-products" class="sr-only">Sort products</label>
+                            <select id="sort-products" aria-label="Sort products">
+                                <option value="featured">Featured</option>
+                                <option value="price-low">
+                                    Price: Low to High
+                                </option>
+                                <option value="price-high">
+                                    Price: High to Low
+                                </option>
+                                <option value="rating">
+                                    Highest Rated
+                                </option>
+                                <option value="name">Name A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="products-grid" class="products-grid">
+                    <!-- Products rendered by JS -->
+                </div>
+                <div id="products-empty" class="products-empty" style="display: none">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <h3>No products found</h3>
+                    <p>Try adjusting your search or filter criteria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why NovaTech -->
+        <section class="why-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Why Choose Us</span>
+                    <h2 class="section-title">Why NovaTech</h2>
+                    <p class="section-subtitle">
+                        We go beyond selling products. We deliver
+                        experiences.
+                    </p>
+                </div>
+                <div class="why-grid">
+                    <div class="why-card reveal">
+                        <div class="why-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13"></rect>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                            </svg>
+                        </div>
+                        <h3>Fast Delivery</h3>
+                        <p>
+                            Free express shipping on all orders over $99.
+                            Get your products delivered within 2 business
+                            days.
+                        </p>
+                    </div>
+                    <div class="why-card reveal">
+                        <div class="why-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3>2-Year Warranty</h3>
+                        <p>
+                            Every product comes with our comprehensive
+                            2-year warranty for complete peace of mind.
+                        </p>
+                    </div>
+                    <div class="why-card reveal">
+                        <div class="why-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>
+                            Our dedicated support team is available around
+                            the clock to assist with any questions.
+                        </p>
+                    </div>
+                    <div class="why-card reveal">
+                        <div class="why-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                        </div>
+                        <h3>Secure Payment</h3>
+                        <p>
+                            Industry-leading encryption keeps your payment
+                            information safe and secure.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item reveal">
+                        <span class="stat-number" data-target="15000">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat-item reveal">
+                        <span class="stat-number" data-target="500">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Products</span>
+                    </div>
+                    <div class="stat-item reveal">
+                        <span class="stat-number" data-target="50">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Team Members</span>
+                    </div>
+                    <div class="stat-item reveal">
+                        <span class="stat-number" data-target="99">0</span>
+                        <span class="stat-suffix">%</span>
+                        <span class="stat-label">Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="reviews" class="testimonials">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Testimonials</span>
+                    <h2 class="section-title">What Our Customers Say</h2>
+                    <p class="section-subtitle">
+                        Real reviews from real customers who love their
+                        NovaTech experience.
+                    </p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "Absolutely blown away by the quality and
+                            service. My MacBook Pro arrived perfectly
+                            packaged and works flawlessly. NovaTech has
+                            earned a loyal customer."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">S</div>
+                            <div>
+                                <strong>Sarah Chen</strong>
+                                <span>Product Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card testimonial-featured reveal">
+                        <div class="testimonial-stars">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "The attention to detail in every product is
+                            remarkable. From the unboxing experience to the
+                            performance, NovaTech delivers premium on every
+                            level. Best tech store I've ever used."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">M</div>
+                            <div>
+                                <strong>Marcus Rivera</strong>
+                                <span>Software Engineer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"
+                                stroke-width="1">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "Lightning fast shipping and the AirPods Pro I
+                            ordered exceeded my expectations. The customer
+                            support was incredibly helpful when I had
+                            questions about my order."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">E</div>
+                            <div>
+                                <strong>Emily Nakamura</strong>
+                                <span>Content Creator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="">
+                <div class="newsletter-inner reveal">
+                    <div class="newsletter-content">
+                        <h2>Stay in the Loop</h2>
+                        <p>
+                            Subscribe to our newsletter for exclusive deals,
+                            product launches, and tech insights.
+                        </p>
+                    </div>
+                    <form id="newsletter-form" class="newsletter-form" aria-label="Newsletter subscription">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" placeholder="Enter your email" required
+                                aria-label="Email address" />
+                            <button type="submit" class="btn btn-primary">
+                                Subscribe
+                            </button>
+                        </div>
+                        <p class="newsletter-note">
+                            No spam, ever. Unsubscribe anytime.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="logo">NovaTech</a>
+                    <p>
+                        Premium technology products for creators and
+                        professionals. Experience innovation that redefines
+                        what's possible.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Twitter" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="GitHub" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="YouTube" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                </path>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NovaTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+
+</html>
