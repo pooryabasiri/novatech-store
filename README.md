@@ -72,7 +72,7 @@ This project was built to demonstrate:
   https://pbasiri.ir
   
   GitHub:
-  https://github.com/PooryAb97
+  https://github.com/pooryabasiri
   
   LinkedIn:
   https://linkedin.com/in/poorya-basiri
