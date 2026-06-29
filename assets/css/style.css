@@ -313,6 +313,9 @@ textarea {
 }
 
 @media (max-width: 768px) {
+    .theme-toggle{
+        display: none;
+    }
     .nav-desktop {
         display: none;
     }
